@@ -1,5 +1,7 @@
 \# Калькулятор на Python
 
+\[!\[codecov](https://codecov.io/gh/dippel/calculator/branch/main/graph/badge.svg)](https://codecov.io/gh/dippel/calculator)
+
 
 
 Простой консольный калькулятор с базовыми математическими операциями.
@@ -34,11 +36,11 @@
 
 1\. Клонируйте репозиторий:
 
-&nbsp;  ```bash
+   ```bash
 
-&nbsp;  git clone https://github.com/dlppe1/calculator.git
+   git clone https://github.com/dlppe1/calculator.git
 
-### Запуск 
+### Запуск
 
 Перейдите в папку проекта: cd calculator
 
