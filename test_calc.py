@@ -1,7 +1,7 @@
 import pytest
-import math
-from calc import Calculator
 import tkinter as tk
+from calc import Calculator
+import time
 
 class TestCalculator:
     """Тесты для графического калькулятора"""
@@ -14,7 +14,12 @@ class TestCalculator:
     
     def teardown_method(self):
         """Уничтожаем окно после каждого теста"""
-        self.root.destroy()
+        try:
+            self.root.update()
+            time.sleep(0.1)  # Небольшая задержка
+            self.root.destroy()
+        except:
+            pass
     
     def test_initial_state(self):
         """Тест начального состояния"""
@@ -49,7 +54,7 @@ class TestCalculator:
         assert self.calc.result_var.get() == "12"
     
     def test_addition(self):
-        """Тест сложения через calculate_result"""
+        """Тест сложения"""
         self.calc.button_click('2')
         self.calc.button_click('+')
         self.calc.button_click('3')
@@ -100,12 +105,10 @@ class TestCalculator:
         self.calc.button_click('^')
         self.calc.button_click('3')
         self.calc.calculate_result()
-        # 2**3 = 8
         assert self.calc.result_var.get() == "8"
     
     def test_complex_expression(self):
         """Тест сложного выражения"""
-        # 2+3*4-5/2 = 2+12-2.5 = 11.5
         self.calc.button_click('2')
         self.calc.button_click('+')
         self.calc.button_click('3')
