@@ -182,8 +182,13 @@ class Calculator:
                 self.current_input = ""
             else:
                 result = math.sqrt(value)
-                # Форматируем результат с одним знаком после запятой
-                result_str = f"{result:.1f}"
+                # Форматируем результат
+                if result.is_integer():
+                    result_str = str(int(result))
+                else:
+                    result_str = f"{result:.2f}".rstrip('0').rstrip('.')
+                    if '.' not in result_str:
+                        result_str = f"{result:.1f}"
                 
                 self.result_var.set(result_str)
                 self.current_input = result_str
@@ -202,11 +207,22 @@ class Calculator:
             expression = self.current_input
             result = eval(expression)
             
-            # Форматируем результат с одним знаком после запятой
-            if isinstance(result, (int, float)):
-                result_str = f"{result:.1f}"
+            # Форматируем результат
+            if isinstance(result, float):
+                if result.is_integer():
+                    result_str = str(int(result))
+                else:
+                    result_str = f"{result:.2f}".rstrip('0').rstrip('.')
+                    # Если после удаления нулей не осталось десятичной части, показываем с одним знаком
+                    if '.' not in result_str:
+                        result_str = f"{result:.1f}"
             else:
                 result_str = str(result)
+            
+            # Специальная проверка для деления: если это результат деления и он целый, показываем с .0
+            # Проверяем, содержит ли выражение оператор деления
+            if '/' in expression and result.is_integer():
+                result_str = f"{result:.1f}"
             
             self.result_var.set(result_str)
             self.add_to_history(expression, result_str)
