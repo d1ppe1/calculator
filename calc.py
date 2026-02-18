@@ -259,4 +259,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = Calculator(root)
     root.mainloop()
-# TODO: Здесь будет исправление бага с корнем в будущей версии
