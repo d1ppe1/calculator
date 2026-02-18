@@ -148,7 +148,7 @@ class Calculator:
             self.result_var.set(self.current_input)
     
     def calculate_square_root(self):
-        """Вычисление квадратного корня (исправленная версия)"""
+        """Вычисление квадратного корня"""
         try:
             # Проверяем, есть ли ввод
             if not self.current_input or self.current_input == "":
@@ -182,11 +182,8 @@ class Calculator:
                 self.current_input = ""
             else:
                 result = math.sqrt(value)
-                # Форматируем результат
-                if result.is_integer():
-                    result_str = str(int(result))
-                else:
-                    result_str = f"{result:.2f}".rstrip('0').rstrip('.')
+                # Форматируем результат с одним знаком после запятой
+                result_str = f"{result:.1f}"
                 
                 self.result_var.set(result_str)
                 self.current_input = result_str
@@ -205,12 +202,9 @@ class Calculator:
             expression = self.current_input
             result = eval(expression)
             
-            # Форматируем результат
-            if isinstance(result, float):
-                if result.is_integer():
-                    result_str = str(int(result))
-                else:
-                    result_str = f"{result:.2f}".rstrip('0').rstrip('.')
+            # Форматируем результат с одним знаком после запятой
+            if isinstance(result, (int, float)):
+                result_str = f"{result:.1f}"
             else:
                 result_str = str(result)
             
